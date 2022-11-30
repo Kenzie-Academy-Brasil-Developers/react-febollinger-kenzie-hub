@@ -1,9 +1,10 @@
-import { RegisterForm } from "../../components/form/register/RegisterForm";
 import logo from "../../assets/logo.png";
 
-import { useNavigate } from "react-router-dom";
+import { RegisterForm } from "../../components/form/register/RegisterForm";
 import { StyledBtnBack } from "../../styles/btnBack";
 import { StyledDivRegister } from "./containerRegister";
+
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export const Register = () => {
 
     navigate("/");
   };
+
   return (
     <StyledDivRegister>
       <section className="sectionLogoRegister">
