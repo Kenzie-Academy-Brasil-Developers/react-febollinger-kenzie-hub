@@ -16,4 +16,9 @@ font-weight:500;
 line-height:21px;
 cursor:pointer;
 
+&:hover {
+    background-color:var(--color-primary-focus);
+    border:1px solid var(--color-primary-focus);
+}
+
 `

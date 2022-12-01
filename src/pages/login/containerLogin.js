@@ -25,7 +25,7 @@ justify-content: center;
 
 & .formLogin {
 width:90%;
-height:56%;
+height:70%;
 
 display: flex;
 flex-direction: column;
@@ -40,7 +40,7 @@ box-shadow: 0px 3.20867px 32.0867px -8.02168px rgba(0, 0, 0, 0.25);
     font-size:15px;
     font-weight:700;
     line-height:22px;
-    padding:1rem 0 0 0;
+    padding:1rem 0;
     
     color:var(--color-greyLetters);
     align-self:center;

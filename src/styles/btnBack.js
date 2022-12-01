@@ -12,4 +12,9 @@ font-size:12pxpx;
 font-weight:600;
 line-height:28px;
 cursor:pointer;
+
+&:hover {
+    border:1px solid var(--color-grey2);
+    background-color:var(--color-grey2);
+}
 `;

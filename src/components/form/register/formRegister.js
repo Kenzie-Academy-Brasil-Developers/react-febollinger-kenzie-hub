@@ -36,6 +36,15 @@ gap:1rem;
     color:var(--color-greyLetters);
 }
 
+& p {
+    align-self:center;
+    font-size:10px;
+    font-weight:400;
+    line-height:18px;
+        
+    color:var(--color-grey1);
+}
+
 & select {
     width:100%;
     height:38px;

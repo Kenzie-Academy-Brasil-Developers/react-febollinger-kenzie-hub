@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledFormLogin = styled.form`
-height: 60%;
+height: 62%;
 width: 90%;
 padding:0.5rem 0;
 
@@ -33,5 +33,14 @@ font-weight:400;
 line-height:21px;
     
 color:var(--color-greyLetters);
+}
+
+& p {
+    align-self:center;
+    font-size:10px;
+    font-weight:400;
+    line-height:1px;
+        
+    color:var(--color-grey1);
 }
 `;

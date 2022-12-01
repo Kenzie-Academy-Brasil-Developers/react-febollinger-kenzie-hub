@@ -7,7 +7,7 @@ export const GlobalStyled = createGlobalStyle`
 	border: 0;
     box-sizing:border-box;
 	font-size: 100%;
-	font: inherit;
+	font-family: 'Inter', sans-serif;
 	
 }
 /* HTML5 display-role reset for older browsers */
