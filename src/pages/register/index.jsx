@@ -1,11 +1,12 @@
-import { RegisterForm } from "../../components/form/register/RegisterForm";
 import logo from "../../assets/logo.png";
 
-import { useNavigate } from "react-router-dom";
+import { RegisterForm } from "../../components/form/register/RegisterForm";
 import { StyledBtnBack } from "../../styles/btnBack";
 import { StyledDivRegister } from "./containerRegister";
 
-export const Register = () => {
+import { useNavigate } from "react-router-dom";
+
+export const Register = ({ loading, setLoading }) => {
   const navigate = useNavigate();
 
   const btnLoginPage = (e) => {
@@ -13,19 +14,22 @@ export const Register = () => {
 
     navigate("/");
   };
+
   return (
-    <StyledDivRegister>
-      <section className="sectionLogoRegister">
-        <div>
-          <img src={logo} alt="Kenzie hub" />
-          <StyledBtnBack type="submit" onClick={btnLoginPage}>
-            Voltar
-          </StyledBtnBack>
-        </div>
-      </section>
-      <section className="sectionForm" height="formRegister">
-        <RegisterForm />
-      </section>
-    </StyledDivRegister>
+    <>
+      <StyledDivRegister>
+        <section className="sectionLogoRegister">
+          <div>
+            <img src={logo} alt="Kenzie hub" />
+            <StyledBtnBack type="submit" onClick={btnLoginPage}>
+              Voltar
+            </StyledBtnBack>
+          </div>
+        </section>
+        <section className="formRegister">
+          <RegisterForm loading={loading} setLoading={setLoading} />
+        </section>
+      </StyledDivRegister>
+    </>
   );
 };

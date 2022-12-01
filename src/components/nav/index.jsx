@@ -12,6 +12,8 @@ export const Nav = () => {
   const logout = (e) => {
     e.preventDefault();
 
+    localStorage.clear();
+
     navigate("/");
   };
   return (

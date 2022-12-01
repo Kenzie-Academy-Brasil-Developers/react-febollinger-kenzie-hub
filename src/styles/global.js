@@ -21,9 +21,6 @@ body {
 ol, ul {
 	list-style: none;
 }
-blockquote, q {
-	quotes: none;
-}
 
 
 :root{

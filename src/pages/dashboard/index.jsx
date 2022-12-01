@@ -2,11 +2,11 @@ import { Header } from "../../components/header";
 import { Main } from "../../components/main";
 import { Nav } from "../../components/nav";
 
-export const Dash = () => {
+export const Dash = ({ user }) => {
   return (
     <>
       <Nav />
-      <Header />
+      <Header user={user} />
       <Main />
     </>
   );
