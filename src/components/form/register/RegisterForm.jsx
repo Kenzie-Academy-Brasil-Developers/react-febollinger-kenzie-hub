@@ -2,57 +2,54 @@ import { ButtonStyled } from "../../../styles/button";
 import { StyledFormRegister } from "../register/formRegister";
 
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const schemaRegister = yup.object().shape({
-  name: yup.string().required("Nome obrigatório").min(3, "mínimo de 3 letras."),
-  emailRegister: yup.string().required("Email obrigatório").email(),
-  passwordRegister: yup
-    .string()
-    .required("Digite uma senha válida")
-    .min(8, "A senha deve ter ao menos 8 caracteres.")
-    .matches(/(?=.*[a-z])/, "necessário ter uma letra minúscula")
-    .matches(/(?=.*[A-Z])/, "necessário ter uma letra maiúscula")
-    .matches(/(?=.*[$*&@#])/, "necessário ter um caractere especial"),
-  confirmPassword: yup
-    .string()
-    .required("As senhas devem ser iguais")
-    .oneOf([yup.ref("passwordRegister"), null], "As senhas não combinam"),
-  bio: yup.string().required("Bio obrigatória"),
-  contact: yup.string().required("Número obrigatório"),
-  type: yup.string().required("Por favor, selecione um módulo"),
-});
+import { toast } from "react-toastify";
 
-export const RegisterForm = () => {
+import { schemaRegister } from "../../schemas/schemaRegister";
+import { Api } from "../../../services";
+
+export const RegisterForm = ({ loading, setLoading }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
+    mode: "onBlur",
     resolver: yupResolver(schemaRegister),
   });
   const navigate = useNavigate();
 
-  const btnLoginPage = (e) => {
-    e.preventDefault();
+  const registerUser = async (formData) => {
+    try {
+      setLoading(true);
 
-    navigate("/");
+      const response = await Api.post("/users", formData);
+      toast.success("Cadastro realizado com sucesso!");
+
+      if (response.data) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleRegister = (data) => {
-    console.log(data);
-  };
+    registerUser(data);
 
-  useEffect(() => {}, []);
+    reset();
+  };
 
   return (
     <>
       <h2>Crie sua conta</h2>
       <p>Rápido e grátis, vamos nessa.</p>
-      <StyledFormRegister onSubmit={handleSubmit(handleRegister)}>
+      <StyledFormRegister onSubmit={handleSubmit(handleRegister)} noValidate>
         <label htmlFor="name">Nome</label>
         <input
           type="text"
@@ -61,27 +58,27 @@ export const RegisterForm = () => {
           placeholder="Digite aqui seu nome"
           {...register("name")}
         />
-        <p>{errors.name?.message}</p>
+        {errors.name && <p>{errors.name?.message}</p>}
 
-        <label htmlFor="emailRegister">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
-          name="emailRegister"
-          id="emailRegister"
+          name="email"
+          id="email"
           placeholder="Digite aqui seu email"
-          {...register("emailRegister")}
+          {...register("email")}
         />
-        <p>{errors.emailRegister?.message}</p>
+        {errors.email && <p>{errors.email.message}</p>}
 
-        <label htmlFor="passwordRegister">Senha</label>
+        <label htmlFor="password">Senha</label>
         <input
           type="password"
-          name="passwordRegister"
-          id="passwordRegister"
+          name="password"
+          id="password"
           placeholder="Digite aqui sua senha"
-          {...register("passwordRegister")}
+          {...register("password")}
         />
-        <p>{errors.passwordRegister?.message}</p>
+        {errors.password && <p>{errors.password.message}</p>}
 
         <label htmlFor="confirmPassword">Confirmar Senha</label>
         <input
@@ -91,7 +88,7 @@ export const RegisterForm = () => {
           placeholder="Digite novamente sua senha"
           {...register("confirmPassword")}
         />
-        <p>{errors.confirmPassword?.message}</p>
+        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
 
         <label htmlFor="bio">Bio</label>
         <input
@@ -101,7 +98,7 @@ export const RegisterForm = () => {
           placeholder="Fale sobre você"
           {...register("bio")}
         />
-        <p>{errors.bio?.message}</p>
+        {errors.bio && <p>{errors.bio.message}</p>}
 
         <label htmlFor="contact">Contato</label>
         <input
@@ -111,19 +108,31 @@ export const RegisterForm = () => {
           placeholder="Opção de contato"
           {...register("contact")}
         />
-        <p>{errors.contact?.message}</p>
+        {errors.contact && <p>{errors.contact.message}</p>}
 
-        <label htmlFor="type">Selecionar módulo</label>
-        <select name="type" id="type" {...register("type")}>
-          <option value="first">Primeiro Módulo</option>
-          <option value="second">Segundo Módulo</option>
-          <option value="third">Terceiro Módulo</option>
-          <option value="fourth">Quarto Módulo</option>
+        <label htmlFor="course_module">Selecionar módulo</label>
+        <select
+          name="course_module"
+          id="course_module"
+          {...register("course_module")}
+        >
+          <option value="Primeiro módulo (Introdução ao Frontend)">
+            Primeiro módulo (Introdução ao Frontend)
+          </option>
+          <option value="Segundo Módulo (Frontend avançado)">
+            Segundo Módulo (Frontend avançado)
+          </option>
+          <option value="Terceiro módulo (Introdução ao Backend)">
+            Terceiro módulo (Introdução ao Backend)
+          </option>
+          <option value="Quarto módulo (Backend Avançado)">
+            Quarto módulo (Backend Avançado)
+          </option>
         </select>
-        <p>{errors.type?.message}</p>
+        {errors.course_module && <p>{errors.course_module.message}</p>}
 
         <ButtonStyled type="submit" buttonColor="entrar">
-          Cadastrar
+          {loading ? "Cadastrando..." : "Cadastrar"}
         </ButtonStyled>
       </StyledFormRegister>
     </>

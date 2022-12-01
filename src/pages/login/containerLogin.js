@@ -23,9 +23,9 @@ justify-content: center;
 }
 
 
-& .sectionForm {
+& .formLogin {
 width:90%;
-height:65%;
+height:56%;
 
 display: flex;
 flex-direction: column;
@@ -36,7 +36,7 @@ border-radius:3px;
 box-shadow: 0px 3.20867px 32.0867px -8.02168px rgba(0, 0, 0, 0.25);
 }
 
-& .sectionForm > h2 {
+& .formLogin > h2 {
     font-size:15px;
     font-weight:700;
     line-height:22px;
@@ -46,7 +46,7 @@ box-shadow: 0px 3.20867px 32.0867px -8.02168px rgba(0, 0, 0, 0.25);
     align-self:center;
 }
 
-& .sectionForm > p{
+& .formLogin > p{
     font-size:10px;
     font-weight:400;
     line-height:18px;
@@ -57,7 +57,7 @@ box-shadow: 0px 3.20867px 32.0867px -8.02168px rgba(0, 0, 0, 0.25);
     padding:0.5rem 0;
 }
 
-& .sectionForm > div {
+& .formLogin > div {
 width:90%;
 align-self:center;
 
@@ -66,7 +66,7 @@ flex-direction: column;
 gap:1rem;
 }
 
-& .sectionForm > div > span {
+& .formLogin > div > span {
 align-self:center;
 
 font-size:10px;
@@ -75,34 +75,35 @@ line-height:14px;
 color:var(--color-grey1);
 }
 
+
 @media (min-width:500px){
     & .sectionLogoRegister {
-        width:70%;
+        width:60%;
     }
 
-    & .sectionForm {
-        width:70%;
+    & .formLogin {
+        width:60%;
     }
 }
 
 @media (min-width:600px){
     & .sectionLogoRegister {
-        width:50%;
+        width:40%;
     }
 
-    & .sectionForm {
-        width:50%;
+    & .formLogin {
+        width:40%;
     }
 }
 
 @media (min-width:800px){
     & .sectionLogoRegister {
-        width:40%;
+        width:35%;
     }
 
-    & .sectionForm {
-        width:40%;
-        height:${props => props.height === "formLogin" ? "70%" : props.height === "formRegister" ? "90%" : ""};
+    & .formLogin {
+        width:35%;
+        height: 65%;
     }
 }
 
@@ -111,8 +112,8 @@ color:var(--color-grey1);
         width:30%;
     }
 
-    & .sectionForm {
-        width:30%;
+    & .formLogin {
+        width:25%;
         
     }
 }
