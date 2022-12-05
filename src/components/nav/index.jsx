@@ -6,13 +6,15 @@ import logo from "../../assets/logo.png";
 
 import { useNavigate } from "react-router-dom";
 
-export const Nav = () => {
+export const Nav = ({ setUser }) => {
   const navigate = useNavigate();
 
   const logout = (e) => {
     e.preventDefault();
 
-    localStorage.clear();
+    localStorage.removeItem("@userToken");
+    localStorage.removeItem("@userId");
+    setUser(null);
 
     navigate("/");
   };

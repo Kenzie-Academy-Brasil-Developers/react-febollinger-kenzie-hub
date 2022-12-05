@@ -1,4 +1,4 @@
-import { ButtonStyled } from "../../../styles/button";
+import { StyledButton } from "../../../styles/button";
 import { StyledFormRegister } from "../register/formRegister";
 
 import { useNavigate } from "react-router-dom";
@@ -131,9 +131,9 @@ export const RegisterForm = ({ loading, setLoading }) => {
         </select>
         {errors.course_module && <p>{errors.course_module.message}</p>}
 
-        <ButtonStyled type="submit" buttonColor="entrar">
+        <StyledButton type="submit" buttonColor="entrar">
           {loading ? "Cadastrando..." : "Cadastrar"}
-        </ButtonStyled>
+        </StyledButton>
       </StyledFormRegister>
     </>
   );

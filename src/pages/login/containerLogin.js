@@ -103,7 +103,7 @@ color:var(--color-grey1);
 
     & .formLogin {
         width:35%;
-        height: 65%;
+        height: 70%;
     }
 }
 
@@ -114,7 +114,7 @@ color:var(--color-grey1);
 
     & .formLogin {
         width:25%;
-        
+        height: 65%;
     }
 }
 `;

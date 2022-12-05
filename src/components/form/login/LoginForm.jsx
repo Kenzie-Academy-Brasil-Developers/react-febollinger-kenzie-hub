@@ -1,4 +1,4 @@
-import { ButtonStyled } from "../../../styles/button";
+import { StyledButton } from "../../../styles/button";
 import { StyledFormLogin } from "../login/formLogin";
 
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 import { Api } from "../../../services";
 import { schemaLogin } from "../../schemas/schemaLogin";
+import { LinkStyled } from "../../../styles/link";
 
 export const LoginForm = ({ setUser, loading, setLoading }) => {
   const navigate = useNavigate();
@@ -21,12 +22,6 @@ export const LoginForm = ({ setUser, loading, setLoading }) => {
     mode: "onBlur",
     resolver: yupResolver(schemaLogin),
   });
-
-  const btnRegisterPage = (e) => {
-    e.preventDefault();
-
-    navigate("/register");
-  };
 
   const loginUser = async (formDate) => {
     // const token = localStorage.getItem("@userToken");
@@ -81,19 +76,15 @@ export const LoginForm = ({ setUser, loading, setLoading }) => {
         />
         {errors.password && <p>{errors.password.message}</p>}
 
-        <ButtonStyled type="submit" buttonColor="entrar">
+        <StyledButton type="submit" buttonColor="entrar">
           {loading ? "Entrando ..." : "Entrar"}
-        </ButtonStyled>
+        </StyledButton>
       </StyledFormLogin>
       <div>
         <span>Ainda não possui uma conta?</span>
-        <ButtonStyled
-          type="submit"
-          buttonColor="cadastrar"
-          onClick={btnRegisterPage}
-        >
+        <LinkStyled color="cadastrar" to="/register">
           Cadastrar
-        </ButtonStyled>
+        </LinkStyled>
       </div>
     </>
   );

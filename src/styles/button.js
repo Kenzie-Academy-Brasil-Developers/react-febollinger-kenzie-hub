@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonStyled = styled.button `
+export const StyledButton = styled.button `
 width:100%;
 height:38px;
 
@@ -22,3 +22,4 @@ cursor:pointer;
 }
 
 `
+

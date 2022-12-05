@@ -26,7 +26,7 @@ export const RoutesPage = ({ user, setUser }) => {
           path="register"
           element={<Register setLoading={setLoading} loading={loading} />}
         />
-        <Route path="home" element={<Dash user={user} />} />
+        <Route path="home" element={<Dash user={user} setUser={setUser} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
