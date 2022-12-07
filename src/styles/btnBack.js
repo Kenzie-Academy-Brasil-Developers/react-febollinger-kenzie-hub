@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StyledBtnBack = styled.button`
-width:67px;
-height:40px;
+width:${props => props.size === "btnAdd" ? "33px" : props.size === "btnLogout" ? "67px" : ""};
+height:32px;
 
 border-radius:3px;
 background-color:var(--color-grey3);

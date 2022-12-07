@@ -1,3 +1,4 @@
+import { StyledBtnBack } from "../../styles/btnBack";
 import { StyledContainer } from "../../styles/container";
 import { StyledMain } from "./styles";
 
@@ -6,10 +7,10 @@ export const Main = () => {
     <StyledMain>
       <StyledContainer>
         <div className="divMain">
-          <h1>Que pena! Estamos em desenvolvimento :(</h1>
-          <p>
-            Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </p>
+          <section className="sectionAdd">
+            <h2>Tecnologias</h2>
+            <StyledBtnBack size="btnAdd">+</StyledBtnBack>
+          </section>
         </div>
       </StyledContainer>
     </StyledMain>

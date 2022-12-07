@@ -9,24 +9,24 @@ top:73px;
 & .divMain {
     margin: 0 auto;
     width: 95%;
+    height:100%;
 }
 
-& .divMain > h1 {
-    font-size:18px;
-    font-weight:700;
-    line-height:28px;
+& .sectionAdd {
+    height:32px;
+    width:100%;
+    margin-top: 0.8rem;
 
-    padding:2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    color:var(--color-greyLetters);
 }
 
-& .divMain > p {
+& .sectionAdd > h2 {
+    color: var(--color-greyLetters);
     font-size:16px;
-    font-weight:400;
-    line-height:24px;
-
-    color:var(--color-white);
+    font-weight:600;
 }
 
 @media (min-width:750px){

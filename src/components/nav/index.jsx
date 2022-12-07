@@ -26,7 +26,7 @@ export const Nav = () => {
       <StyledContainer>
         <div className="divNav">
           <img src={logo} alt="kenzie hub" />
-          <StyledBtnBack type="submit" onClick={logout}>
+          <StyledBtnBack type="submit" onClick={logout} size="btnLogout">
             Sair
           </StyledBtnBack>
         </div>
