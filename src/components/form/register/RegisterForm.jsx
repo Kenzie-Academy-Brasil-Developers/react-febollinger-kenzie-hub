@@ -1,55 +1,18 @@
 import { StyledButton } from "../../../styles/button";
 import { StyledFormRegister } from "../register/formRegister";
 
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import { toast } from "react-toastify";
-
-import { schemaRegister } from "../../schemas/schemaRegister";
-import { Api } from "../../../services";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/userContext";
 
 export const RegisterForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    mode: "onBlur",
-    resolver: yupResolver(schemaRegister),
-  });
-  const navigate = useNavigate();
-
-  const registerUser = async (formData) => {
-    try {
-      setLoading(true);
-
-      const response = await Api.post("/users", formData);
-      toast.success("Cadastro realizado com sucesso!");
-
-      if (response.data) {
-        navigate("/");
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRegister = (data) => {
-    registerUser(data);
-
-    reset();
-  };
+  const { handleSubmit, errors, register, loading, registerUser } =
+    useContext(UserContext);
 
   return (
     <>
       <h2>Crie sua conta</h2>
       <p>Rápido e grátis, vamos nessa.</p>
-      <StyledFormRegister onSubmit={handleSubmit(handleRegister)} noValidate>
+      <StyledFormRegister onSubmit={handleSubmit(registerUser)} noValidate>
         <label htmlFor="name">Nome</label>
         <input
           type="text"

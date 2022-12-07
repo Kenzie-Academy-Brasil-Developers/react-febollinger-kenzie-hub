@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 import { Api } from "../services";
 import { schemaLogin } from "../components/schemas/schemaLogin";
+import { schemaRegister } from "../components/schemas/schemaRegister";
 
 export const UserContext = createContext({});
 
@@ -16,11 +17,10 @@ export const UserProvider = ({ children }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
-    resolver: yupResolver(schemaLogin),
+    resolver: yupResolver(schemaLogin, schemaRegister),
   });
 
   const navigate = useNavigate();
@@ -71,10 +71,21 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const handleLogin = (date) => {
-    loginUser(date);
+  const registerUser = async (formData) => {
+    try {
+      setLoading(true);
 
-    reset();
+      const response = await Api.post("/users", formData);
+      toast.success("Cadastro realizado com sucesso!");
+
+      if (response.data) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,7 +94,8 @@ export const UserProvider = ({ children }) => {
         register,
         handleSubmit,
         errors,
-        handleLogin,
+        registerUser,
+        loginUser,
         loading,
         user,
         setUser,

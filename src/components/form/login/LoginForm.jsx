@@ -6,13 +6,13 @@ import { useContext } from "react";
 import { UserContext } from "../../../contexts/userContext";
 
 export const LoginForm = () => {
-  const { handleSubmit, handleLogin, register, errors, loading } =
+  const { handleSubmit, loginUser, register, errors, loading } =
     useContext(UserContext);
 
   return (
     <>
       <h2>Login</h2>
-      <StyledFormLogin onSubmit={handleSubmit(handleLogin)} noValidate>
+      <StyledFormLogin onSubmit={handleSubmit(loginUser)} noValidate>
         <label htmlFor="email">Email</label>
         <input
           type="email"
