@@ -1,7 +1,10 @@
 import { StyledHeader } from "./styles";
 import { StyledContainer } from "../../styles/container";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
 
-export const Header = ({ user }) => {
+export const Header = () => {
+  const { user } = useContext(UserContext);
   return (
     <StyledHeader>
       <StyledContainer>

@@ -5,9 +5,12 @@ import { StyledBtnBack } from "../../styles/btnBack";
 import logo from "../../assets/logo.png";
 
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
 
-export const Nav = ({ setUser }) => {
+export const Nav = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const logout = (e) => {
     e.preventDefault();

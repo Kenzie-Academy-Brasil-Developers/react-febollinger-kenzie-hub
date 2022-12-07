@@ -1,32 +1,16 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Dash } from "../pages/dashboard";
+import { Home } from "../pages/home";
 import { Login } from "../pages/login";
 import { NotFound } from "../pages/notFound";
 import { Register } from "../pages/register";
 
-export const RoutesPage = ({ user, setUser }) => {
-  const [loading, setLoading] = useState(false);
-
+export const RoutesPage = () => {
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Login
-              user={user}
-              setUser={setUser}
-              loading={loading}
-              setLoading={setLoading}
-            />
-          }
-        />
-        <Route
-          path="register"
-          element={<Register setLoading={setLoading} loading={loading} />}
-        />
-        <Route path="home" element={<Dash user={user} setUser={setUser} />} />
+        <Route path="/" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="home" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

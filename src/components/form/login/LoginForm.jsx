@@ -1,56 +1,13 @@
 import { StyledButton } from "../../../styles/button";
 import { StyledFormLogin } from "../login/formLogin";
-
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import { toast } from "react-toastify";
-
-import { Api } from "../../../services";
-import { schemaLogin } from "../../schemas/schemaLogin";
 import { LinkStyled } from "../../../styles/link";
 
-export const LoginForm = ({ setUser, loading, setLoading }) => {
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    mode: "onBlur",
-    resolver: yupResolver(schemaLogin),
-  });
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/userContext";
 
-  const loginUser = async (formDate) => {
-    // const token = localStorage.getItem("@userToken");
-    // const id = localStorage.getItem("@userId");
-
-    try {
-      setLoading(true);
-
-      const result = await Api.post("/sessions", formDate);
-      window.localStorage.setItem("@userToken", result.data.token);
-      window.localStorage.setItem("@userId", result.data.user.id);
-
-      setUser(result.data.user);
-
-      toast.success("Login realizado com sucesso");
-
-      navigate("/home");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleLogin = (date) => {
-    loginUser(date);
-
-    reset();
-  };
+export const LoginForm = () => {
+  const { handleSubmit, handleLogin, register, errors, loading } =
+    useContext(UserContext);
 
   return (
     <>

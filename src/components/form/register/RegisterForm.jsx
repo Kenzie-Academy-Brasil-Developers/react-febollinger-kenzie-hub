@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { schemaRegister } from "../../schemas/schemaRegister";
 import { Api } from "../../../services";
 
-export const RegisterForm = ({ loading, setLoading }) => {
+export const RegisterForm = () => {
   const {
     register,
     handleSubmit,

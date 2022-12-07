@@ -5,7 +5,7 @@ import { RegisterForm } from "../../components/form/register/RegisterForm";
 import { StyledDivRegister } from "./containerRegister";
 import { LinkStyled } from "../../styles/link";
 
-export const Register = ({ loading, setLoading }) => {
+export const Register = () => {
   return (
     <>
       <StyledDivRegister>
@@ -18,7 +18,7 @@ export const Register = ({ loading, setLoading }) => {
           </div>
         </section>
         <section className="formRegister">
-          <RegisterForm loading={loading} setLoading={setLoading} />
+          <RegisterForm />
         </section>
       </StyledDivRegister>
     </>
