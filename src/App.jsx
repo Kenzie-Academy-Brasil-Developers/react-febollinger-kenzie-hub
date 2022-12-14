@@ -4,6 +4,7 @@ import { GlobalStyled } from "./styles/global";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "./contexts/userContext";
+import { TechProvider } from "./contexts/techContext";
 
 export const App = () => {
   return (
@@ -11,7 +12,9 @@ export const App = () => {
       <GlobalStyled />
 
       <UserProvider>
-        <RoutesPage />
+        <TechProvider>
+          <RoutesPage />
+        </TechProvider>
       </UserProvider>
 
       <ToastContainer />
