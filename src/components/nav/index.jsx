@@ -5,14 +5,19 @@ import { StyledBtnBack } from "../../styles/btnBack";
 import logo from "../../assets/logo.png";
 
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
 
 export const Nav = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const logout = (e) => {
     e.preventDefault();
 
-    localStorage.clear();
+    localStorage.removeItem("@userToken");
+    localStorage.removeItem("@userId");
+    setUser(null);
 
     navigate("/");
   };
@@ -21,7 +26,7 @@ export const Nav = () => {
       <StyledContainer>
         <div className="divNav">
           <img src={logo} alt="kenzie hub" />
-          <StyledBtnBack type="submit" onClick={logout}>
+          <StyledBtnBack type="submit" onClick={logout} size="btnLogout">
             Sair
           </StyledBtnBack>
         </div>

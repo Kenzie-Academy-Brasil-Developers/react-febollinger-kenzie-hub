@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const ButtonStyled = styled.button `
-width:100%;
+export const StyledButton = styled.button `
+width:${props => props.size === "btnDlt" ? "40%" : props.size === "btnEdt" ? "55%" : "100%"};
 height:38px;
 
 background-color: ${props => props.buttonColor === "entrar" ? "var(--color-primary)" : props.buttonColor === "cadastrar" ? "var(--color-grey1)" : ""};
@@ -22,3 +22,4 @@ cursor:pointer;
 }
 
 `
+

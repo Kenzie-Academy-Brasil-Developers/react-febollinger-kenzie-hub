@@ -28,7 +28,7 @@ gap:2rem;
 }
 
 & .formRegister {
-    width:90%;
+    width:85%;
     height:65%;
     
     display: flex;
@@ -64,45 +64,26 @@ gap:2rem;
 }
 
 
-@media (min-width:500px){
+@media (min-width:426px){
+
     & .sectionLogoRegister {
-        width:60%;
+        width:340px;
     }
 
     & .formRegister {
-        width:60%;
-    }
-}
-
-@media (min-width:600px){
-    & .sectionLogoRegister {
-        width:40%;
-    }
-
-    & .formRegister {
-        width:40%;
+        width:340px;
     }
 }
 
 @media (min-width:800px){
     & .sectionLogoRegister {
-        width:35%;
+        width:340px;
     }
 
     & .formRegister {
-        width:35%;
-       
+        width:340px;
+       height:80%;
     }
 }
 
-@media (min-width:900px){
-    & .sectionLogoRegister {
-        width:30%;
-    }
-
-    & .formRegister {
-        width:25%;
-        
-    }
-}
 `

@@ -2,7 +2,7 @@ import logo from "../../assets/logo.png";
 import { LoginForm } from "../../components/form/login/LoginForm";
 import { StyledDivLogin } from "./containerLogin";
 
-export const Login = ({ user, setUser, loading, setLoading }) => {
+export const Login = () => {
   return (
     <>
       <StyledDivLogin>
@@ -10,12 +10,7 @@ export const Login = ({ user, setUser, loading, setLoading }) => {
           <img src={logo} alt="Kenzie hub" />
         </section>
         <section className="formLogin">
-          <LoginForm
-            setUser={setUser}
-            user={user}
-            loading={loading}
-            setLoading={setLoading}
-          />
+          <LoginForm />
         </section>
       </StyledDivLogin>
     </>

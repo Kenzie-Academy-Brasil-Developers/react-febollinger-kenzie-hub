@@ -9,7 +9,7 @@ padding:0.5rem 0;
 display: flex;
 flex-direction: column;
 align-self: center;
-gap:1rem;
+gap:10px;;
 
 & label {
     font-size:10px;

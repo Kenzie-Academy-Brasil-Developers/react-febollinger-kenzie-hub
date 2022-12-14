@@ -24,8 +24,8 @@ justify-content: center;
 
 
 & .formLogin {
-width:90%;
-height:70%;
+width:80%;
+height:68%;
 
 display: flex;
 flex-direction: column;
@@ -75,46 +75,23 @@ line-height:14px;
 color:var(--color-grey1);
 }
 
-
-@media (min-width:500px){
-    & .sectionLogoRegister {
-        width:60%;
-    }
-
+@media (min-width:426px){
+    
     & .formLogin {
-        width:60%;
-    }
-}
-
-@media (min-width:600px){
-    & .sectionLogoRegister {
-        width:40%;
-    }
-
-    & .formLogin {
-        width:40%;
+        width:320px;
+        height: 370px;
     }
 }
 
 @media (min-width:800px){
     & .sectionLogoRegister {
-        width:35%;
+        width:350px;
     }
 
     & .formLogin {
-        width:35%;
-        height: 65%;
+        width:320px;
+        height: 380px;
     }
 }
 
-@media (min-width:900px){
-    & .sectionLogoRegister {
-        width:30%;
-    }
-
-    & .formLogin {
-        width:25%;
-        
-    }
-}
 `;

@@ -1,66 +1,18 @@
-import { ButtonStyled } from "../../../styles/button";
+import { StyledButton } from "../../../styles/button";
 import { StyledFormLogin } from "../login/formLogin";
+import { LinkStyled } from "../../../styles/link";
 
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/userContext";
 
-import { toast } from "react-toastify";
-
-import { Api } from "../../../services";
-import { schemaLogin } from "../../schemas/schemaLogin";
-
-export const LoginForm = ({ setUser, loading, setLoading }) => {
-  const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    mode: "onBlur",
-    resolver: yupResolver(schemaLogin),
-  });
-
-  const btnRegisterPage = (e) => {
-    e.preventDefault();
-
-    navigate("/register");
-  };
-
-  const loginUser = async (formDate) => {
-    // const token = localStorage.getItem("@userToken");
-    // const id = localStorage.getItem("@userId");
-
-    try {
-      setLoading(true);
-
-      const result = await Api.post("/sessions", formDate);
-      window.localStorage.setItem("@userToken", result.data.token);
-      window.localStorage.setItem("@userId", result.data.user.id);
-
-      setUser(result.data.user);
-
-      toast.success("Login realizado com sucesso");
-
-      navigate("/home");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleLogin = (date) => {
-    loginUser(date);
-
-    reset();
-  };
+export const LoginForm = () => {
+  const { handleSubmit, loginUser, register, errors, loading } =
+    useContext(UserContext);
 
   return (
     <>
       <h2>Login</h2>
-      <StyledFormLogin onSubmit={handleSubmit(handleLogin)} noValidate>
+      <StyledFormLogin onSubmit={handleSubmit(loginUser)} noValidate>
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -81,19 +33,15 @@ export const LoginForm = ({ setUser, loading, setLoading }) => {
         />
         {errors.password && <p>{errors.password.message}</p>}
 
-        <ButtonStyled type="submit" buttonColor="entrar">
+        <StyledButton type="submit" buttonColor="entrar">
           {loading ? "Entrando ..." : "Entrar"}
-        </ButtonStyled>
+        </StyledButton>
       </StyledFormLogin>
       <div>
         <span>Ainda não possui uma conta?</span>
-        <ButtonStyled
-          type="submit"
-          buttonColor="cadastrar"
-          onClick={btnRegisterPage}
-        >
+        <LinkStyled color="cadastrar" to="/register">
           Cadastrar
-        </ButtonStyled>
+        </LinkStyled>
       </div>
     </>
   );

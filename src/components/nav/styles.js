@@ -7,6 +7,8 @@ height:73px;
 width:100%;
 
 border-bottom:1px solid var(--color-grey3);
+background-color:var(--color-grey4);
+z-index:1;
 
 & .divNav{
     width: 95%;

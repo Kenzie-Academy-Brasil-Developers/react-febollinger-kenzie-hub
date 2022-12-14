@@ -8,6 +8,7 @@ export const GlobalStyled = createGlobalStyle`
     box-sizing:border-box;
 	font-size: 100%;
 	font-family: 'Inter', sans-serif;
+	text-decoration:none;
 	
 }
 /* HTML5 display-role reset for older browsers */
@@ -17,6 +18,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: var(--color-black);
 }
 ol, ul {
 	list-style: none;
