@@ -1,23 +1,20 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
 import { createContext, useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { SchemaCreateTech } from "../components/schemas/schemaCreateTech";
+
 import { Api } from "../services";
+import { UserContext } from "./userContext";
 
 export const TechContext = createContext({});
 
 export const TechProvider = ({ children }) => {
   const [tech, setTech] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showModalAdd, setShowModalAdd] = useState(false);
+  const [showModalDlt, setShowModalDlt] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(SchemaCreateTech),
-  });
+  const token = localStorage.getItem("@userToken");
+
+  const { userTech, setUserTech } = useContext(UserContext);
 
   const createTechnologie = async (date) => {
     try {
@@ -29,28 +26,76 @@ export const TechProvider = ({ children }) => {
         },
       });
 
-      window.localStorage.setItem("@userToken", token);
-      window.localStorage.setItem("@userId", result.data.id);
+      if (result.data) {
+        setShowModalAdd(!showModalAdd);
 
-      setTech([...tech, result.data]);
+        setUserTech([...userTech, result.data]);
 
-      toast.success("Tecnologia cadastrada");
+        toast.success("Tecnologia cadastrada");
+      }
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
+      if (error) {
+        setShowModalAdd(!showModalAdd);
+      }
+    }
+  };
+
+  const editTech = async (body) => {
+    try {
+      const result = await Api.put(`/users/techs/`, body, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success("Tecnologia atualizada");
+      if (result.data) {
+        setShowModalDlt(!showModalDlt);
+      }
+    } catch (error) {
+      toast.error("Tente novamente.");
+    }
+  };
+
+  const dltTech = async (id) => {
+    try {
+      const result = await Api.delete(`/users/techs/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (result) {
+        setShowModalDlt(!showModalDlt);
+
+        const findingId = userTech.filter((techId) => techId.id !== id);
+
+        setUserTech(findingId);
+
+        toast.success(`Tecnologia deletada com sucesso!`);
+      }
+    } catch (error) {
+      toast.error("Não foi possivel deletar, tente novamente");
+
+      if (error) {
+        setShowModalDlt(!showModalDlt);
+      }
     }
   };
 
   return (
     <TechContext.Provider
       value={{
-        register,
-        handleSubmit,
-        errors,
         createTechnologie,
-        showModal,
-        setShowModal,
-        tech,
+        showModalAdd,
+        setShowModalAdd,
+        showModalDlt,
+        setShowModalDlt,
         setTech,
+        editTech,
+        dltTech,
+        tech,
       }}
     >
       {children}

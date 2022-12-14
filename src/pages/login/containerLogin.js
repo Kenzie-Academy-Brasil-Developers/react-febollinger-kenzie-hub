@@ -25,7 +25,7 @@ justify-content: center;
 
 & .formLogin {
 width:80%;
-height:70%;
+height:68%;
 
 display: flex;
 flex-direction: column;

@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { ProtectedRoute } from "../components/ProtectedRoutes";
 import { Home } from "../pages/home";
 import { Login } from "../pages/login";
 import { NotFound } from "../pages/notFound";
@@ -9,8 +10,12 @@ export const RoutesPage = () => {
     <>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="home" element={<Home />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/home" element={<Home />} />
+        </Route>
+
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

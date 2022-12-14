@@ -1,20 +1,21 @@
 import { useContext } from "react";
 import { TechContext } from "../../../contexts/techContext";
-import { FormModal } from "../../form/modal";
-import { StyledModal } from "./styles";
+
+import { StyledModalAdd } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
+import { FormModalAdd } from "../../form/modalAdd";
 
 export const CreateModal = () => {
-  const { showModal, setShowModal } = useContext(TechContext);
+  const { showModalAdd, setShowModalAdd } = useContext(TechContext);
   return (
-    <StyledModal className="modalAdd">
+    <StyledModalAdd className="modalAdd">
       <div>
         <h3>Cadastrar Tecnologia</h3>
-        <span onClick={() => setShowModal(!showModal)}>
+        <span onClick={() => setShowModalAdd(!showModalAdd)}>
           <AiOutlineClose />
         </span>
       </div>
-      <FormModal />
-    </StyledModal>
+      <FormModalAdd />
+    </StyledModalAdd>
   );
 };

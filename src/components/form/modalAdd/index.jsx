@@ -1,11 +1,23 @@
 import { useContext } from "react";
 import { TechContext } from "../../../contexts/techContext";
-import { StyledButton } from "../../../styles/button";
-import { StyledFormModal } from "./formModal";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-export const FormModal = () => {
-  const { register, handleSubmit, createTechnologie, errors } =
-    useContext(TechContext);
+import { StyledButton } from "../../../styles/button";
+import { StyledFormModal } from "../../../styles/formModal";
+import { SchemaCreateTech } from "../../schemas/schemaCreateTech";
+
+export const FormModalAdd = () => {
+  const { createTechnologie } = useContext(TechContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+    resolver: yupResolver(SchemaCreateTech),
+  });
 
   return (
     <StyledFormModal onSubmit={handleSubmit(createTechnologie)}>

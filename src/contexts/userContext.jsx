@@ -1,18 +1,27 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 
 import { Api } from "../services";
 import { schemaLogin } from "../components/schemas/schemaLogin";
 import { schemaRegister } from "../components/schemas/schemaRegister";
+// import { useContext } from "react";
+// import { TechContext } from "./techContext";
 
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [userTech, setUserTech] = useState([]);
+  const [select, setSelect] = useState({});
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // const { tech } = useContext(TechContext);
 
   const {
     register,
@@ -23,11 +32,14 @@ export const UserProvider = ({ children }) => {
     resolver: yupResolver(schemaLogin, schemaRegister),
   });
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     const userProfile = async () => {
       const token = localStorage.getItem("@userToken");
+
+      if (!token) {
+        setLoading(loading);
+        return;
+      }
 
       try {
         const results = await Api.get("/profile", {
@@ -35,18 +47,18 @@ export const UserProvider = ({ children }) => {
             authorization: `Bearer ${token}`,
           },
         });
+
         setUser(results.data);
-        console.log(results.data);
+
+        setUserTech(results.data.techs);
       } catch (error) {
         console.log(error);
-        if (error) {
-          localStorage.removeItem("@userToken");
-          localStorage.removeItem("@userId");
-        }
+      } finally {
+        setLoading(loading);
       }
     };
     userProfile();
-  }, []);
+  }, [loading]);
 
   const loginUser = async (formDate) => {
     try {
@@ -54,16 +66,15 @@ export const UserProvider = ({ children }) => {
 
       const result = await Api.post("/sessions", formDate);
 
-      const { token, user: responseUser } = result.data;
+      localStorage.setItem("@userToken", result.data.token);
+      localStorage.setItem("@userId", result.data.user.id);
 
-      window.localStorage.setItem("@userToken", token);
-      window.localStorage.setItem("@userId", responseUser.id);
-
-      setUser(responseUser);
+      setUser(result.data.user);
 
       toast.success("Login realizado com sucesso");
 
-      navigate("/home");
+      const goTo = location.state?.from?.pathname || "/home";
+      navigate(goTo, { replace: true });
     } catch (error) {
       toast.error(error.response);
     } finally {
@@ -99,6 +110,10 @@ export const UserProvider = ({ children }) => {
         loading,
         user,
         setUser,
+        userTech,
+        setUserTech,
+        select,
+        setSelect,
       }}
     >
       {children}

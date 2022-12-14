@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const StyledModalAdd = styled.section`
+export const StyledEditModal = styled.section `
 width:296px;
-height:250px;
+height:270px;
 
 background-color:var(--color-grey3);
 margin:0 auto;
@@ -12,12 +12,11 @@ border-radius:3px;
 
 position:absolute;
 top:1rem;
+display: flex;
+flex-direction: column;
+align-items: center;
 
-& .blur{
-    filter:blur(2px);
-}
-
-& div {
+& > div {
     height:40px;
     width:100%;
     padding:0 0.5rem;
@@ -52,5 +51,8 @@ top:1rem;
     font-size:12px;
     font-weight:700;
     line-height:26px;
+
+    padding:2rem 0;
 }
+
 `;

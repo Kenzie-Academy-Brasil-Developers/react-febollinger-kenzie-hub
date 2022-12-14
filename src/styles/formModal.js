@@ -20,6 +20,10 @@ justify-content: space-evenly;
     line-height:0px;
 }
 
+& label > span {
+    
+}
+
 & label > input {
     width:100%;
     height:39px;
@@ -58,4 +62,10 @@ justify-content: space-evenly;
 
     align-self:center;
 }
-`;
+
+& .divBtn {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+`
