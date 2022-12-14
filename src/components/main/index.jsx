@@ -12,7 +12,7 @@ import { StyledMain } from "./styles";
 export const Main = () => {
   const { showModalAdd, setShowModalAdd, showModalDlt } =
     useContext(TechContext);
-  const { userTech, select } = useContext(UserContext);
+  const { userTech } = useContext(UserContext);
 
   return (
     <StyledMain className="blur">
@@ -41,7 +41,7 @@ export const Main = () => {
               )}
             </ul>
           </section>
-          {showModalDlt && <EditModal select={select} />}
+          {showModalDlt && <EditModal />}
         </div>
       </StyledContainer>
     </StyledMain>

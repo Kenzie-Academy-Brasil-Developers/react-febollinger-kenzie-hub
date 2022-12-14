@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { Api } from "../services";
 import { schemaLogin } from "../components/schemas/schemaLogin";
 import { schemaRegister } from "../components/schemas/schemaRegister";
+import { useEffect } from "react";
 // import { useContext } from "react";
 // import { TechContext } from "./techContext";
 
@@ -17,6 +18,7 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [userTech, setUserTech] = useState([]);
   const [select, setSelect] = useState({});
+  const [selectEdit, setSelectEdit] = useState({});
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,25 +42,28 @@ export const UserProvider = ({ children }) => {
         setLoading(loading);
         return;
       }
+      if (token) {
+        try {
+          const results = await Api.get("/profile", {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          });
 
-      try {
-        const results = await Api.get("/profile", {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
+          setUser(results.data);
 
-        setUser(results.data);
+          setUserTech(results.data.techs);
 
-        setUserTech(results.data.techs);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(loading);
+          if (results) {
+            navigate("/home");
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
     userProfile();
-  }, [loading]);
+  }, [loading, navigate]);
 
   const loginUser = async (formDate) => {
     try {
@@ -114,6 +119,8 @@ export const UserProvider = ({ children }) => {
         setUserTech,
         select,
         setSelect,
+        selectEdit,
+        setSelectEdit,
       }}
     >
       {children}
