@@ -7,11 +7,11 @@ import { TechContext } from "../../../contexts/techContext";
 import { StyledButton } from "../../../styles/button";
 import { StyledFormModal } from "../../../styles/formModal";
 import { SchemaEditTech } from "../../schemas/schemaEditTech";
-// import { UserContext } from "../../../contexts/userContext";
+import { UserContext } from "../../../contexts/userContext";
 
-export const FormModalEdit = ({ select }) => {
-  const { editTech, dltTech } = useContext(TechContext);
-  // const { userTech } = useContext(UserContext);
+export const FormModalEdit = () => {
+  const { dltTech, editTech } = useContext(TechContext);
+  const { select, selectEdit } = useContext(UserContext);
 
   const {
     register,
@@ -22,15 +22,15 @@ export const FormModalEdit = ({ select }) => {
     resolver: yupResolver(SchemaEditTech),
   });
 
+  const submitEdit = (date) => {
+    editTech(date, select);
+  };
+
   return (
-    <StyledFormModal
-      onSubmit={() => {
-        handleSubmit(editTech);
-      }}
-    >
+    <StyledFormModal onSubmit={handleSubmit(submitEdit)}>
       <label>
         Nome
-        <input value={select.title} disabled />
+        <input value={selectEdit} disabled />
       </label>
 
       <label htmlFor="status">

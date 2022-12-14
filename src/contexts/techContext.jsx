@@ -41,19 +41,25 @@ export const TechProvider = ({ children }) => {
     }
   };
 
-  const editTech = async (body) => {
+  const editTech = async (body, id) => {
     try {
-      const result = await Api.put(`/users/techs/`, body, {
+      const result = await Api.put(`/users/techs/${id}`, body, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
 
-      toast.success("Tecnologia atualizada");
+      const filteringTech = userTech.filter((tech) => tech.id !== id);
+      console.log(filteringTech);
+
       if (result.data) {
+        console.log(result.data);
         setShowModalDlt(!showModalDlt);
+        setUserTech([...filteringTech, result.data]);
+        toast.success("Tecnologia atualizada");
       }
     } catch (error) {
+      console.log(error);
       toast.error("Tente novamente.");
     }
   };
@@ -77,7 +83,7 @@ export const TechProvider = ({ children }) => {
       }
     } catch (error) {
       toast.error("Não foi possivel deletar, tente novamente");
-
+      console.log(error);
       if (error) {
         setShowModalDlt(!showModalDlt);
       }

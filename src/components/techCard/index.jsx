@@ -7,7 +7,7 @@ import { StyledCard } from "./styles";
 
 export const Card = ({ title, status, id }) => {
   const { setShowModalDlt } = useContext(TechContext);
-  const { setSelect } = useContext(UserContext);
+  const { setSelect, setSelectEdit } = useContext(UserContext);
 
   return (
     <StyledCard key={id}>
@@ -18,7 +18,8 @@ export const Card = ({ title, status, id }) => {
           type="submit"
           onClick={() => {
             setShowModalDlt(true);
-            setSelect(id, title);
+            setSelect(id);
+            setSelectEdit(title);
           }}
         >
           <FiEdit3 />

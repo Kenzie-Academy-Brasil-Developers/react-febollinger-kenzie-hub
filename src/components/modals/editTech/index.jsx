@@ -6,8 +6,9 @@ import { AiOutlineClose } from "react-icons/ai";
 import { StyledEditModal } from "./styles";
 import { FormModalEdit } from "../../form/modalEdit";
 
-export const EditModal = ({ select }) => {
+export const EditModal = () => {
   const { showModalDlt, setShowModalDlt } = useContext(TechContext);
+
   return (
     <StyledEditModal>
       <div>
@@ -16,7 +17,7 @@ export const EditModal = ({ select }) => {
           <AiOutlineClose />
         </span>
       </div>
-      <FormModalEdit select={select} />
+      <FormModalEdit />
     </StyledEditModal>
   );
 };
